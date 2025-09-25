@@ -9,4 +9,8 @@ wheels/
 # Virtual environments
 .venv
 
+# Project-specific files
 /.quarto/
+.python-version
+pyproject.toml
+uv.lock
