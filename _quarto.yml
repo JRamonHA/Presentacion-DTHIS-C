@@ -1,3 +1,11 @@
 project:
   type: website
-  output-dir: docs  
+  output-dir: docs
+
+lang: es
+
+website:
+  title: "Presentación"
+  favicon: img/UNAM.ico 
+  site-url: "https://jramonha.github.io/Presentacion-DTHIS-C/"
+  description: "Diapositivas para la presentación del DTHIS-C"

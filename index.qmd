@@ -24,3 +24,27 @@ Contenido
 ## Página 2 {footer=false}
 
 Contenido
+
+## Página 3 {footer=false}
+
+Contenido
+
+## Página 4 {footer=false}
+
+Contenido
+
+## Página 5 {footer=false}
+
+Contenido
+
+## Página 6 {footer=false}
+
+Contenido
+
+## Página 7 {footer=false}
+
+Contenido
+
+## Página 8 {footer=false}
+
+Contenido
