@@ -1,0 +1,26 @@
+---
+title: Desarrollo e implementación con tecnologías libres de un dispositivo portátil para evaluar el confort térmico, lumínico y acústico en interiores
+subtitle: Tesis para obtener el título de Ingeniero en Energías Renovables
+lang: es
+
+author:
+- name: José Ramón Hernández Aguilar
+  affiliation: Instituto de Energías Renovables, UNAM
+
+format: 
+  revealjs:
+    logo: "img/logo-ier-unam.png" 
+    theme: simple
+    slide-number: c/t
+    transition: slide
+    incremental: true  
+    css: styles.css
+---
+
+## Página 1 {footer=false}
+
+Contenido
+
+## Página 2 {footer=false}
+
+Contenido
