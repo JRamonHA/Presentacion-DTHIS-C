@@ -6,8 +6,5 @@ from .functions import (
     dropdowns_plot,
     compare_plot,
     linear_reg_subplots,
-    linear_reg_plot,
-    calculate_error,
-    wind_calibration,
-    thermo_calibration
+    linear_reg_plot
 )
