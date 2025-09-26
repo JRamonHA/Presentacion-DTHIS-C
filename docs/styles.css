@@ -2,7 +2,7 @@
 
 /* Cambiar tamaño del título de la portada */
 #title-slide .title {
-  font-size: 1.55em;  /* ajusta el valor a tu gusto */
+  font-size: 1.55em;
 }
 
 /* Cambiar tamaño del subtítulo */
@@ -19,4 +19,51 @@
 .reveal section p {
   font-size: 0.75em;
   line-height: 1.5;
+}
+
+/* Cambiar el tamaño de las captions de figuras */
+.reveal figcaption,
+.reveal .quarto-float-caption,
+.reveal .quarto-subfloat-caption {
+  font-size: 0.5em !important; 
+}
+
+/* Ajustar el tamaño de las figuras */
+#fig-bloques img {
+  max-width: 55%; 
+  margin: 0 auto;
+  display: block;
+}
+
+#fig-carcasa img {
+  max-width: 45%; 
+  margin: 0 auto;
+  display: block;
+}
+
+#fig-prototipo img {
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+
+#fig-flujo img {
+  max-width: 40%; 
+  margin: 0 auto;
+  display: block;
+}
+
+/* Ajustar tamaño del texto en los tabs */
+.panel-tabset-tabby a {
+  font-size: 0.6em !important;   /* ajusta el tamño del texto */
+  padding: 0.25em 0.6em;         /* hace más compactos los tabs */
+  line-height: 1.0;              /* ajusta la altura */
+}
+
+
+/* Ajustar tamaño de contenedores de plotly */
+.plot-container.plotly {
+  width: 50% !important;   
+  height: 200px !important;
+  margin: 0 auto;     
 }

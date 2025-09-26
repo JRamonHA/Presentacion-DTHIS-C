@@ -1,72 +1,72 @@
 [
   {
-    "objectID": "index.html#página-1",
-    "href": "index.html#página-1",
+    "objectID": "index.html#planteamiento-del-problema",
+    "href": "index.html#planteamiento-del-problema",
     "title": "Desarrollo e implementación con tecnologías libres de un dispositivo portátil para evaluar el confort térmico, lumínico y acústico en interiores",
-    "section": "Página 1",
-    "text": "Página 1\nContenido"
+    "section": "Planteamiento del problema",
+    "text": "Planteamiento del problema\nDTHIS-C"
   },
   {
-    "objectID": "index.html#página-2",
-    "href": "index.html#página-2",
+    "objectID": "index.html#justificación",
+    "href": "index.html#justificación",
     "title": "Desarrollo e implementación con tecnologías libres de un dispositivo portátil para evaluar el confort térmico, lumínico y acústico en interiores",
-    "section": "Página 2",
-    "text": "Página 2\nContenido"
+    "section": "Justificación",
+    "text": "Justificación\nDTHIS-C"
   },
   {
-    "objectID": "index.html#página-3",
-    "href": "index.html#página-3",
+    "objectID": "index.html#objetivos",
+    "href": "index.html#objetivos",
     "title": "Desarrollo e implementación con tecnologías libres de un dispositivo portátil para evaluar el confort térmico, lumínico y acústico en interiores",
-    "section": "Página 3",
-    "text": "Página 3\nContenido"
+    "section": "Objetivos",
+    "text": "Objetivos\nDTHIS-C"
   },
   {
-    "objectID": "index.html#página-4",
-    "href": "index.html#página-4",
+    "objectID": "index.html#dthis-c",
+    "href": "index.html#dthis-c",
     "title": "Desarrollo e implementación con tecnologías libres de un dispositivo portátil para evaluar el confort térmico, lumínico y acústico en interiores",
-    "section": "Página 4",
-    "text": "Página 4\nContenido"
+    "section": "DTHIS-C",
+    "text": "DTHIS-C\nDTHIS-C"
   },
   {
-    "objectID": "index.html#página-5",
-    "href": "index.html#página-5",
+    "objectID": "index.html#descripción-del-dispositivo",
+    "href": "index.html#descripción-del-dispositivo",
     "title": "Desarrollo e implementación con tecnologías libres de un dispositivo portátil para evaluar el confort térmico, lumínico y acústico en interiores",
-    "section": "Página 5",
-    "text": "Página 5\nContenido"
+    "section": "Descripción del dispositivo",
+    "text": "Descripción del dispositivo\n\nDiseñoCarcasaPrototipoLógica de programación\n\n\n\n\n\n\n\n\nFigura 1: Diagrama de bloques del DTHIS-C.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n(a) Exterior\n\n\n\n\n\n\n\n\n\n\n\n(b) Interior\n\n\n\n\n\n\n\n\n\n\n\n(c) Cámara\n\n\n\n\n\n\n\n\n\n\n\n\n\n(d) Regulador de voltaje\n\n\n\n\n\n\n\n\n\n\n\n(e) TPF1\n\n\n\n\n\n\n\n\n\n\n\n(f) Wind Sensor\n\n\n\n\n\n\n\nFigura 2: Diseño 3D de la carcasa y componentes asociados.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n(a) Prototipo\n\n\n\n\n\n\n\n\n\n\n\n(b) Exterior 1\n\n\n\n\n\n\n\n\n\n\n\n(c) Exterior 2\n\n\n\n\n\n\n\n\n\n\n\n(d) Wind Sensor y TPF1\n\n\n\n\n\n\n\nFigura 3: Prototipo del DTHIS-C.\n\n\n\n\n\n\n\n\n\n\n\nFigura 4: Diagrama de flujo del funcionamiento del DTHIS-C."
   },
   {
-    "objectID": "index.html#página-6",
-    "href": "index.html#página-6",
+    "objectID": "index.html#metodología-experimental",
+    "href": "index.html#metodología-experimental",
     "title": "Desarrollo e implementación con tecnologías libres de un dispositivo portátil para evaluar el confort térmico, lumínico y acústico en interiores",
-    "section": "Página 6",
-    "text": "Página 6\nContenido"
+    "section": "Metodología experimental",
+    "text": "Metodología experimental\nDTHIS-C"
   },
   {
-    "objectID": "index.html#página-7",
-    "href": "index.html#página-7",
+    "objectID": "index.html#temperatura-del-aire",
+    "href": "index.html#temperatura-del-aire",
     "title": "Desarrollo e implementación con tecnologías libres de un dispositivo portátil para evaluar el confort térmico, lumínico y acústico en interiores",
-    "section": "Página 7",
-    "text": "Página 7\nContenido"
+    "section": "Temperatura del aire",
+    "text": "Temperatura del aire\n\nTermoparesSCD30\n\n\n\n\n\n\n                            \n                                            \n\n\nFigura 5: Temperaturas registradas por los termopares durante el proceso de calibración."
   },
   {
-    "objectID": "index.html#página-8",
-    "href": "index.html#página-8",
+    "objectID": "index.html#discusión",
+    "href": "index.html#discusión",
     "title": "Desarrollo e implementación con tecnologías libres de un dispositivo portátil para evaluar el confort térmico, lumínico y acústico en interiores",
-    "section": "Página 8",
-    "text": "Página 8\nContenido"
+    "section": "Discusión",
+    "text": "Discusión\nDTHIS-C"
   },
   {
-    "objectID": "index.html#página-9",
-    "href": "index.html#página-9",
+    "objectID": "index.html#trabajo-a-futuro",
+    "href": "index.html#trabajo-a-futuro",
     "title": "Desarrollo e implementación con tecnologías libres de un dispositivo portátil para evaluar el confort térmico, lumínico y acústico en interiores",
-    "section": "Página 9",
-    "text": "Página 9\nContenido"
+    "section": "Trabajo a futuro",
+    "text": "Trabajo a futuro\nDTHIS-C"
   },
   {
-    "objectID": "index.html#página-10",
-    "href": "index.html#página-10",
+    "objectID": "index.html#conclusión-general",
+    "href": "index.html#conclusión-general",
     "title": "Desarrollo e implementación con tecnologías libres de un dispositivo portátil para evaluar el confort térmico, lumínico y acústico en interiores",
-    "section": "Página 10",
-    "text": "Página 10\nContenido"
+    "section": "Conclusión general",
+    "text": "Conclusión general\nDTHIS-C"
   }
 ]

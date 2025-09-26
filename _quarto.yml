@@ -3,4 +3,4 @@ project:
   output-dir: docs
 
 website:
-  favicon: img/UNAM.ico 
+  favicon: images/UNAM.ico 

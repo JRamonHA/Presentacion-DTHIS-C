@@ -9,7 +9,7 @@ author:
 
 format: 
   revealjs:
-    logo: "img/logo-ier-unam.png" 
+    logo: "images/logo-ier-unam.png" 
     theme: simple
     slide-number: c/t
     transition: slide
@@ -17,44 +17,116 @@ format:
     css: styles.css
 ---
 
-## Página 1 {footer=false}
+```{python}
+#| echo: false
+import thesis_tools as tt
+```
 
-Contenido
+# Introducción 
 
-## Página 2 {footer=false}
+## Planteamiento del problema 
 
-Contenido
+DTHIS-C
 
-## Página 3 {footer=false}
+## Justificación 
 
-Contenido
+DTHIS-C
 
-## Página 4 {footer=false}
+## Objetivos 
 
-Contenido
+DTHIS-C
 
-## Página 5 {footer=false}
+## DTHIS-C 
 
-Contenido
+DTHIS-C
 
-## Página 6 {footer=false}
+# Diseño y construcción 
 
-Contenido
+## Descripción del dispositivo 
 
-## Página 7 {footer=false}
+::: {.panel-tabset}
 
-Contenido
+### Diseño
 
-## Página 8 {footer=false}
+![Diagrama de bloques del DTHIS-C.](/images/diagrama_bloques.png){#fig-bloques}
 
-Contenido
+### Carcasa
 
-## Página 9 {footer=false}
+::: {#fig-carcasa layout-ncol=3 layout-nrow=2}
+![Exterior](images/case.png){group="carcasa" #fig-exterior}
 
-Contenido
+![Interior](images/case_full.png){group="carcasa" #fig-interior}
 
-## Página 10 {footer=false}
+![Cámara](images/camera.png){group="carcasa" #fig-camara}
 
-Contenido
+![Regulador de voltaje](images/power_supply.png){group="carcasa" #fig-regulador}
+
+![TPF1](images/t_rad.png){group="carcasa" #fig-tpf1}
+
+![Wind Sensor](images/wind_sensor.png){group="carcasa" #fig-windsensor}
+
+Diseño 3D de la carcasa y componentes asociados.
+:::
+
+### Prototipo
+
+::: {#fig-prototipo layout-ncol=4 layout-nrow=1}
+![Prototipo](images/dthis-1.jpg){group="prototipo" #fig-dthis-1}
+
+![Exterior 1](images/dthis-2.jpg){group="prototipo" #fig-dthis-2}
+
+![Exterior 2](images/dthis-3.jpg){group="prototipol" #fig-dthis-3}
+
+![Wind Sensor y TPF1](images/dthis-4.jpg){group="prototipo" #fig-dthis-4}
+
+Prototipo del DTHIS-C.
+:::
+
+### Lógica de programación
+
+![Diagrama de flujo del funcionamiento del DTHIS-C.](/images/diagrama_flujo.png){#fig-flujo}
+
+:::
+
+# Calibración y referenciación 
+
+## Metodología experimental
+
+DTHIS-C
+
+## Temperatura del aire
+
+::: {.panel-tabset}
+
+### Termopares
+
+```{python}
+#| echo: false
+#| label: fig-termopares
+#| fig-cap: "Temperaturas registradas por los termopares durante el proceso de calibración."
+tt.scatter_plot('data/temp.parquet',
+                columns=['TEMP1', 'TEMP2', 'TEMP3', 'TEMP4'],
+                x_label='Tiempo',
+                y_label='Temperatura (°C)',
+                legend_labels=['Termopar 1', 'Termopar 2', 'Termopar 3', 'Termopar 4'])
+```
+
+### SCD30
+
+:::
+
+# Conclusiones 
+
+## Discusión 
+
+DTHIS-C
+
+## Trabajo a futuro 
+
+DTHIS-C
+
+## Conclusión general 
+
+DTHIS-C
 
 # Gracias por su atención
