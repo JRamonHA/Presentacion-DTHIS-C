@@ -4,6 +4,3 @@ project:
 
 website:
   favicon: img/UNAM.ico 
-
-execute:
-  freeze: auto
