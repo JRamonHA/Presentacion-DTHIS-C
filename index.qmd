@@ -94,11 +94,11 @@ Prototipo del DTHIS-C.
 
 DTHIS-C
 
-## Temperatura del aire
+## Termopares 
 
 ::: {.panel-tabset}
 
-### Termopares
+### Antes {.smaller}
 
 ```{python}
 #| echo: false
@@ -111,9 +111,60 @@ tt.scatter_plot('data/temp.parquet',
                 legend_labels=['Termopar 1', 'Termopar 2', 'Termopar 3', 'Termopar 4'])
 ```
 
-### SCD30
+### Calibración {.smaller}
+
+::: columns
+::: {.column width="25%"}
+
+```{=tex}
+\begin{align}
+T_{ref} &= 1.0450 \times Termopar 1 - 2.4327 \\
+T_{ref} &= 1.0602 \times Termopar 2 - 2.8632 \\
+T_{ref} &= 1.0814 \times Termopar 3 - 4.4316 \\
+T_{ref} &= 1.0554 \times Termopar 4 - 3.9348
+\end{align}
+```
 
 :::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="72%"}
+
+```{python}
+#| echo: false
+#| label: fig-ctermopares
+#| fig-cap: "Resultados de las mediciones de temperatura después de aplicar la regresión lineal."
+time_intervals = [('15:44:01', '15:52:31', 10.),
+                  ('16:02:06', '16:11:52', 20.),
+                  ('16:20:44', '16:28:58', 30.),
+                  ('16:39:23', '16:49:57', 40.),
+                  ('16:58:24', '17:08:25', 50.)]
+
+columns = ['TEMP1', 'TEMP2', 'TEMP3', 'TEMP4']
+
+titles = ['Termopar 1', 'Termopar 2', 'Termopar 3', 'Termopar 4']
+
+tt.linear_reg_subplots('data/temp.parquet', columns, time_intervals, titles)
+```
+
+:::
+:::
+
+### Error {.smaller}
+
+| Termopar   | EM (antes) [°C] | EM (después) [°C] | EAM (antes) [°C] | EAM (después) [°C] |
+|------------|-----------------|-------------------|------------------|--------------------|
+| Termopar 1 | 1.00            | −0.00             | 1.00             | 0.08               |
+| Termopar 2 | 0.95            | 0.00              | 0.99             | 0.08               |
+| Termopar 3 | 1.77            | −0.00             | 1.77             | 0.10               |
+| Termopar 4 | 2.11            | 0.00              | 2.11             | 0.08               |
+
+:::
+
+## SCD30
+
 
 # Conclusiones 
 

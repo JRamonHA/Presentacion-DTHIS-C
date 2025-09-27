@@ -60,10 +60,28 @@
   line-height: 1.0;              /* ajusta la altura */
 }
 
-
 /* Ajustar tamaño de contenedores de plotly */
 .plot-container.plotly {
   width: 50% !important;   
   height: 200px !important;
   margin: 0 auto;     
+}
+
+/* Ajustar tamaño de ecuaciones */
+.math.display {
+  display: block;
+  transform: scale(0.90);
+}
+
+.math.display svg {
+  max-width: 110%;
+}
+
+/* Ajustar tamaño de tablas */
+table.caption-top {
+  font-size: 0.8rem;        
+  border-collapse: collapse;
+  margin: 0 auto;          
+  transform: scale(1.5);   
+  transform-origin: top center;
 }

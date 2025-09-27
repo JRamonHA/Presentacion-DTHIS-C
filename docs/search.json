@@ -42,11 +42,18 @@
     "text": "Metodología experimental\nDTHIS-C"
   },
   {
-    "objectID": "index.html#temperatura-del-aire",
-    "href": "index.html#temperatura-del-aire",
+    "objectID": "index.html#termopares",
+    "href": "index.html#termopares",
     "title": "Desarrollo e implementación con tecnologías libres de un dispositivo portátil para evaluar el confort térmico, lumínico y acústico en interiores",
-    "section": "Temperatura del aire",
-    "text": "Temperatura del aire\n\nTermoparesSCD30\n\n\n\n\n\n\n                            \n                                            \n\n\nFigura 5: Temperaturas registradas por los termopares durante el proceso de calibración."
+    "section": "Termopares",
+    "text": "Termopares\n\nAntesCalibraciónError\n\n\n\n\n\n\n                            \n                                            \n\n\nFigura 5: Temperaturas registradas por los termopares durante el proceso de calibración.\n\n\n\n\n\n\n\n\n\\[\\begin{align}\nT_{ref} &= 1.0450 \\times Termopar 1 - 2.4327 \\\\\nT_{ref} &= 1.0602 \\times Termopar 2 - 2.8632 \\\\\nT_{ref} &= 1.0814 \\times Termopar 3 - 4.4316 \\\\\nT_{ref} &= 1.0554 \\times Termopar 4 - 3.9348\n\\end{align}\\]\n\n\n\n\n\n\n\n                            \n                                            \n\n\nFigura 6: Resultados de las mediciones de temperatura después de aplicar la regresión lineal.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTermopar\nEM (antes) [°C]\nEM (después) [°C]\nEAM (antes) [°C]\nEAM (después) [°C]\n\n\n\n\nTermopar 1\n1.00\n−0.00\n1.00\n0.08\n\n\nTermopar 2\n0.95\n0.00\n0.99\n0.08\n\n\nTermopar 3\n1.77\n−0.00\n1.77\n0.10\n\n\nTermopar 4\n2.11\n0.00\n2.11\n0.08"
+  },
+  {
+    "objectID": "index.html#scd30",
+    "href": "index.html#scd30",
+    "title": "Desarrollo e implementación con tecnologías libres de un dispositivo portátil para evaluar el confort térmico, lumínico y acústico en interiores",
+    "section": "SCD30",
+    "text": "SCD30"
   },
   {
     "objectID": "index.html#discusión",
