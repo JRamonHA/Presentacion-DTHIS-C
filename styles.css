@@ -21,8 +21,13 @@
   line-height: 1.3;
 }
 
-/* Cambiar el tamaño de las listas ordenadas */
+/* Cambiar el tamaño de las listas */
 .reveal section ol {
+  font-size: 0.48em;
+  line-height: 1.5;
+}
+
+.reveal section ul {
   font-size: 0.48em;
   line-height: 1.5;
 }
@@ -42,7 +47,7 @@
 }
 
 #fig-carcasa img {
-  max-width: 45%; 
+  max-width: 55%; 
   margin: 0 auto;
   display: block;
 }
@@ -53,7 +58,19 @@
   display: block;
 }
 
+#fig-dashboard img {
+  max-width: 45%; 
+  margin: 0 auto;
+  display: block;
+}
+
 #fig-flujo img {
+  max-width: 40%; 
+  margin: 0 auto;
+  display: block;
+}
+
+#fig-repo img {
   max-width: 40%; 
   margin: 0 auto;
   display: block;
@@ -73,8 +90,8 @@
 
 /* Ajustar tamaño del texto en los tabs */
 .panel-tabset-tabby a {
-  font-size: 0.6em !important;   /* ajusta el tamño del texto */
-  padding: 0.25em 0.6em;         /* hace más compactos los tabs */
+  font-size: 0.8em !important;   /* ajusta el tamño del texto */
+  padding: 0.3em 0.8em;         /* hace más compactos los tabs */
   line-height: 1.0;              /* ajusta la altura */
 }
 

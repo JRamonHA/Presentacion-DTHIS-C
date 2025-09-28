@@ -22,25 +22,65 @@ format:
 import thesis_tools as tt
 ```
 
-# Introducción 
+
+## Introducción
+
+El **Dispositivo de Temperatura, Humedad, Iluminación y Sonido de Campaña** (DTHIS-C) es un dispositivo portátil desarrollado para medir, de forma simultánea y en tiempo real, diversas variables físicas que inciden directamente en el confort de los espacios interiores. Las variables evaluadas son:
+
+<ul>
+  <li>Temperatura del aire</li>
+  <li>Temperatura radiante</li>
+  <li>Humedad relativa</li>
+  <li>Velocidad del viento</li>
+  <li>Concentración de CO<sub>2</sub></li>
+  <li>Luminancia</li>
+  <li>Niveles de sonido</li>
+</ul>
+
+
+El DTHIS-C está conformado por seis sensores, dos microcontroladores y dos acondicionadores de señal. Para comprender su funcionamiento, es necesario introducir algunos conceptos básicos de instrumentación electrónica, tales como sensores, microcontroladores y acondicionadores de señal, los cuales constituyen la base tecnológica de su diseño.
 
 ## Planteamiento del problema 
 
-DTHIS-C
+Actualmente gran parte de la vida ocurre en espacios interiores (aulas, oficinas, lugares de trabajo), donde el diseño no siempre considera el confort de los ocupantes, afectando bienestar e incluso la salud.
+
+<ul>
+  <li>Iluminación deficiente: Reduce la concentración y aumenta riesgos visuales.</li>
+
+  <li>Ventilación inadecuada: Degrada la calidad del aire y favorece la propagación de enfermedades, como se evidenció en la pandemia de COVID-19.</li>
+
+  <li>Otros factores (temperatura, humedad, ruido) generan incomodidad y reducen productividad.</li>
+</ul>
+
+De ahí surge la necesidad de herramientas accesibles que midan y evalúen variables ambientales para detectar y corregir deficiencias en el diseño y operación de espacios interiores.
 
 ## Justificación 
 
-DTHIS-C
+La evaluación del confort interior exige medir variables como temperatura, humedad, calidad del aire, ruido e iluminación, pero los equipos comerciales suelen ser costosos y poco accesibles para personas, instituciones o proyectos pequeños.
+
+El DTHIS-C surge como alternativa económica: construido con componentes accesibles y software de código abierto, asegura bajo costo, documentación y posibilidad de replicación.
+
+Integra sensores validados frente a equipos de referencia (Fluke 975 Airmeter, QUESTemp 36 y WindMaster) y se conecta a ThingsBoard, plataforma IoT que permite visualizar y analizar datos en tiempo real.
+
+Así, el DTHIS-C ofrece una herramienta accesible para evaluar entornos interiores y favorecer espacios más saludables, confortables y adecuados para actividades académicas, laborales y sociales.
 
 ## Objetivos 
 
-DTHIS-C
+#### Objetivo general
+<ul>
+  <li>Desarrollar un dispositivo de confort móvil usando hardware accesible y software libre.</li>
+</ul>
 
-## DTHIS-C 
+#### Objetivos específicos
+<ul>
+  <li>Selección de variables a medir.</li>
+  <li>Identificación y selección de sensores apropiados.</li>
+  <li>Calibración y referenciación de los sensores seleccionados.</li>
+  <li>Propuesta de un diseño de dispositivo con la integración de los sensores.</li>
+  <li>Integración del dispositivo a un sistema de Internet de las Cosas (IoT).</li>
+  <li>Documentación del proyecto en un repositorio.</li>
+</ul>
 
-DTHIS-C
-
-# Diseño y construcción 
 
 ## Descripción del dispositivo 
 
@@ -82,9 +122,21 @@ Diseño 3D de la carcasa y componentes asociados.
 Prototipo del DTHIS-C.
 :::
 
+### Tablero interactivo
+
+![Tablero interactivo del DTHIS-C.](/images/dashboard.png){#fig-dashboard}
+
 ### Lógica de programación
 
 ![Diagrama de flujo del funcionamiento del DTHIS-C.](/images/diagrama_flujo.png){#fig-flujo}
+
+### Repositorio
+
+Toda la documentación, diseños CAD/STL, manuales, lista de materiales y código del DTHIS-C están disponibles en un repositorio público de GitHub.
+
+El repositorio, bajo licencia MIT, permite acceder, usar y modificar el proyecto, garantizando su reproducción, adaptación y mejora por la comunidad.
+
+![Acceso al repositorio del DTHIS-C.](/images/qrcode_github.png){#fig-repo}
 
 :::
 
@@ -92,7 +144,44 @@ Prototipo del DTHIS-C.
 
 ## Metodología experimental
 
-DTHIS-C
+::: {.panel-tabset}
+
+### Campañas
+
+Se diseñaron campañas de calibración y referenciación específicas para cada sensor, para poder garantizar la exactitud de los datos recopilados.
+
+<ul>
+  <li>**Calibración:** Consiste en comparar y ajustar un sensor con un estándar bajo condiciones controladas, corrigiendo errores sistemáticos para asegurar lecturas exactas.</li>
+  <li>**Referenciación:** Compara las lecturas del sensor con un instrumento de referencia en condiciones reales, sin modificar el sensor, con el fin de evaluar su desempeño práctico y detectar desviaciones por factores ambientales o de instalación.</li>
+</ul>
+
+### Validación
+
+Para validar los procesos de calibración y referenciación y evaluar la exactitud de los sensores, se emplearon dos métricas:
+
+<ul>
+<li>**Error Medio (EM):** Mide la desviación promedio de las mediciones del sensor respecto al instrumento de referencia. Un valor positivo indica que el sensor tiende a sobreestimar, mientras que un valor negativo revela una subestimación.</li>
+</ul>
+
+```{=tex}
+\begin{align}
+EM = \frac{1}{n} \sum_{i=1}^{n} (X_{s,i} - X_{r,i})
+\end{align}
+```
+
+donde $X_{s,i}$ y  $X_{r,i}$ son las lecturas del sensor y de la referencia para cada muestra, el índice $i$ indica la posición de cada par de lecturas en la serie de datos, y $n$ es el total de muestras.
+
+<ul>
+<li>**Error Absoluto Medio (EAM):** Calcula el promedio de las diferencias absolutas entre las mediciones del sensor y las de la referencia, sin considerar el signo. Esta métrica proporciona una medida de la magnitud del error, independientemente de su dirección.</li>
+</ul>
+
+```{=tex}
+\begin{align}
+EAM = \frac{1}{n} \sum_{i=1}^{n} |X_{s,i} - X_{r,i}|
+\end{align}
+```
+
+:::
 
 # Temperatura del aire
 
@@ -112,6 +201,18 @@ tt.scatter_plot('data/temp.parquet',
                 y_label='Temperatura (°C)',
                 legend_labels=['Termopar 1', 'Termopar 2', 'Termopar 3', 'Termopar 4'])
 ```
+
+### Regresión lineal
+
+El ajuste por regresión lineal es una técnica estadística utilizada para modelar la relación entre una variable dependiente y una o más variables independientes. En este caso, la variable dependiente es la temperatura de referencia ($T_{ref}$), mientras que las variables independientes corresponden a las lecturas obtenidas por cada termopar. El modelo lineal se expresa de la forma:
+
+```{=tex}
+\begin{align}
+T_{ref} = m \times T_{sensor} + b
+\end{align}
+```
+
+donde $m$ es la pendiente y $b$ es la ordenada al origen. La regresión lineal permite minimizar el error entre las mediciones del sensor y los valores de referencia.
 
 ### Calibración {.smaller}
 
@@ -407,7 +508,7 @@ tt.scatter_subplots('data/scd30.parquet', subplot_configs)
 
 ### Procedimiento {.smaller}
 
-Para calibrar el micrófono USB del DTHIS- utilizó el TES-1356 Sound Level Calibrator generando tonos de referencia de 94 dB y 114 dB a 1,000 Hz, con un error de ±0.5 dB, dicho instrumento sirvió para generar un entorno controlado de medición.
+Para calibrar el micrófono USB del DTHIS-C se utilizó el TES-1356 Sound Level Calibrator generando tonos de referencia de 94 dB y 114 dB a 1,000 Hz, con un error de ±0.5 dB, dicho instrumento sirvió para generar un entorno controlado de medición.
 
 Sin embargo, el ajuste final se realizó empleando la siguiente ecuación empírica:
 
@@ -486,18 +587,33 @@ En este contexto, los mapas de luminancia son cualitativos: muestran la distribu
 
 :::
 
-# Conclusiones 
-
 ## Discusión 
 
-DTHIS-C
+Los resultados experimentales demuestran que el DTHIS-C es capaz de entregar datos confiables y precisos, validados frente a instrumentos de referencia profesionales como el Fluke 975, el QUESTemp 36 y el WindMaster, confirmando la efectividad de los procesos de calibración y referenciación implementados.  
+
+| Sensor               | EM (antes) | EM (después) | EAM (antes) | EAM (después) |
+|----------------------|------------|--------------|-------------|---------------|
+| Termopar 1           | 1.00°C     | -0.00°C      | 1.00°C     | 0.08°C         |
+| Termopar 2           | 0.95°C     | 0.00°C       | 0.99°C     | 0.08°C         |
+| Termopar 3           | 1.77°C     | -0.00°C      | 1.77°C     | 0.10°C         |
+| Termopar 4           | 2.11°C     | 0.00°C       | 2.11°C     | 0.08°C         |
+| TPF1/E-20            | -0.11°C    | -0.00°C      | 0.14°C     | 0.11°C         |
+| Wind Sensor          | -0.01 m/s  | -0.00 m/s    | 0.06 m/s   | 0.05 m/s       |
+| SCD30 T              | 0.89°C     | -            | 0.89°C     | -              |
+| SCD30 HR             | -2.17 %    | -            | 2.17 %     | -              |
+| SCD30 CO<sub>2</sub> | 9.65 ppm   | -            | 13.16 ppm  | -              |
 
 ## Trabajo a futuro 
 
-DTHIS-C
+<ul>
+  <li>**Operación headless de la Raspberry Pi:** configurar el sistema para prescindir de monitor y periféricos, facilitando campañas más portátiles.</li>
+  <li>**Indicadores luminosos de estado:** integrar LEDs que confirmen el encendido de cada componente y la transmisión de datos hacia ThingsBoard.</li>
+  <li>**Almacenamiento local:** incorporar una tarjeta microSD para registrar datos en paralelo a la transmisión IoT, evitando la dependencia exclusiva de la conexión Wi-Fi.</li>
+  <li>**Sistema de alimentación autónomo:** implementar baterías recargables de alta capacidad para ampliar el rango de operación en entornos remotos.</li>
+</ul>
 
 ## Conclusión general 
 
-DTHIS-C
+Tras sus pruebas, el DTHIS-C demostró ser un dispositivo eficaz y accesible para la evaluación del confort en espacios interiores. Al integrar múltiples variables ambientales en un único sistema con capacidad de transmisión y visualización en tiempo real, se posiciona como una alternativa viable frente a instrumentos convencionales de alto costo.
 
 # Gracias por su atención
