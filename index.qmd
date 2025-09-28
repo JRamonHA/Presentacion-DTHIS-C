@@ -94,11 +94,13 @@ Prototipo del DTHIS-C.
 
 DTHIS-C
 
+# Temperatura del aire
+
 ## Termopares 
 
 ::: {.panel-tabset}
 
-### Antes {.smaller}
+### Procedimiento {.smaller}
 
 ```{python}
 #| echo: false
@@ -165,6 +167,324 @@ tt.linear_reg_subplots('data/temp.parquet', columns, time_intervals, titles)
 
 ## SCD30
 
+::: {.panel-tabset}
+
+### Procedimiento {.smaller}
+
+Para la campaña de referenciación del SCD30 se utilizó el Fluke 975 AirMeter, instrumento portátil que mide temperatura, humedad relativa, CO<sub>2</sub> y CO. Durante 7 h 45 min ambos dispositivos registraron simultáneamente una muestra por minuto, colocados próximos entre sí en una zona aislada para evitar interferencias y presencia humana.
+
+### Referenciación {.smaller}
+
+```{python}
+#| echo: false
+#| label: fig-scd30-t
+#| fig-cap: "Comparación de las mediciones de temperatura del Fluke y el SCD30 durante su campaña de referenciación."
+tt.scatter_plot('data/scd30.parquet',
+                columns=['T', 'T_F'],
+                traces_colors=['#EF553B', '#FFA15A'],
+                x_label='Tiempo',
+                y_label='Temperatura (°C)',
+                legend_labels=['SCD30', 'Fluke'])
+```
+
+### Error {.smaller}
+
+| Variable     | EM [°C] | EAM [°C] |
+|--------------|---------|----------|
+| Temperatura  | 0.89    | 0.89     |
+
+:::
+
+# Temperatura radiante
+
+## TPF1 
+
+::: {.panel-tabset}
+
+### Procedimiento {.smaller}
+
+Como parte de la campaña de calibración del TPF1, se utilizó un confortímetro QUESTemp 36, capaz de medir temperatura radiante, del aire y humedad relativa. El equipo se colocó en una caja que bloqueaba la radiación solar directa y el viento, enfocando la medición en la radiación térmica del entorno. Paralelamente se ubicó el TPF1, registrándose datos de ambos sensores, cada minuto durante 23 horas.
+
+### Calibración {.smaller}
+
+::: columns
+::: {.column width="29%"}
+
+```{=tex}
+\begin{align}
+T_{ref} = 1.0582 \times Temperatura - 1.5553
+\end{align}
+```
+ 
+:::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="68%"}
+
+```{python}
+#| echo: false
+#| label: fig-cradiante
+#| fig-cap: "Comparación de las mediciones del QUESTemp 36, el TPF1/E-20 y sus datos tras la calibración."
+tt.scatter_plot('data/cal_trad.parquet',
+                columns=['temp', 'calibrated', 'globo'],
+                x_label='Tiempo',
+                y_label='Temperatura (°C)',
+                legend_labels=['TPF1/E-20', 'TPF1/E-20 (Calibrado)' ,'QUESTemp 36'])
+```
+
+:::
+:::
+
+### Error {.smaller}
+
+| Fase                | EM [°C]      | EAM [°C]     |
+|---------------------|--------------|--------------|
+| Antes de calibrar   | -0.10        | 0.14         |
+| Después de calibrar | -0.00        | 0.11         |
+
+:::
+
+# Velocidad del viento
+
+## Wind Sensor
+
+::: {.panel-tabset}
+
+### Procedimiento {.smaller}
+
+::: columns
+::: {.column width="52%"}
+
+Para calibrar el Wind Sensor se empleó como referencia el WindMaster, anemómetro ultrasónico tridimensional. 
+
+Durante 1 hora se registraron datos a 1 Hz, con el Wind Sensor montado en la parte superior central del WindMaster sin interferir en sus mediciones. En campo abierto, el Wind Sensor midió voltaje, que se correlacionó con la velocidad del viento del WindMaster para obtener la ecuación de calibración (voltaje–m/s).
+ 
+:::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="45%"}
+
+![Posición del Wind Sensor sobre el WindMaster durante su calibración.](/images/wind_test.png){#fig-wtest}
+
+:::
+:::
+
+### Campaña {.smaller}
+
+```{python}
+#| echo: false
+#| label: fig-viento
+#| fig-cap: "Comparación de la velocidad del viento registrada por el WindMaster y el voltaje del Wind Sensor durante la campaña de calibración."
+subplot_configs = [
+    {
+        'columns': ['voltage'],
+        'traces_colors': ['#FF6692'],
+        'x_label': 'Tiempo',
+        'y_label': 'Voltaje (V)',
+        'legend_labels': ['Wind Sensor']
+    },
+    {
+        'columns': ['ws'],
+        'traces_colors': ['#19D3F3'],
+        'x_label': 'Tiempo',
+        'y_label': 'Velocidad de viento (m/s)',
+        'legend_labels': ['WindMaster']
+    }
+]
+
+tt.scatter_subplots('data/ws.parquet', subplot_configs)
+```
+
+### Corrección {.smaller}
+
+El Wind Sensor emplea anemometría por filamento caliente: un elemento resistivo se mantiene a mayor temperatura que el aire, y la velocidad del viento se calcula según el voltaje requerido para compensar la pérdida de calor.
+
+En una campaña adicional se detectó un desfase sistemático de 1.1621 V en condiciones de viento nulo (0 m/s). Para aislar la respuesta al viento, este valor se restó de cada lectura antes de la calibración, de modo que la señal procesada reflejara únicamente la influencia del viento sobre el filamento.
+
+### Ecuación {.smaller}
+
+Según el fabricante, la relación entre la velocidad del viento (WS), el voltaje corregido y la temperatura sigue la siguiente ley de potencia:
+
+```{=tex}
+\begin{align}
+WS = a \times (\text{Voltaje})^b \times (\text{Temperatura})^c
+\end{align}
+```
+
+Para facilitar el ajuste mediante técnicas de regresión, se aplicó una transformación logarítmica a ambos lados de la ecuación, lo que permitió convertir el modelo en una forma lineal:
+
+```{=tex}
+\begin{align}
+\ln(WS) = \ln(a) + b \times \ln(\text{Voltaje}) + c \times \ln(\text{Temperatura})
+\end{align}
+```
+
+Se aplicó un remuestreo de 10 segundos a los datos de voltaje del Wind Sensor, ya que mostró mayor correlación (0.8637) con las mediciones del WindMaster. Con esos datos se realizó una regresión lineal, obteniendo la ecuación de calibración.
+
+```{=tex}
+\begin{align}
+WS = 26.3431 \times (\text{Voltaje})^{1.4273} \times (\text{Temperatura})^{-0.7631}
+\end{align}
+``` 
+
+### Resultados {.smaller}
+
+```{python}
+#| echo: false
+#| label: fig-cviento
+#| fig-cap: "Comparación de las mediciones de velocidad del viento registradas por el WindMaster y el Wind Sensor tras su calibración."
+tt.scatter_plot('data/cal_ws.parquet',
+                columns=['ws', '10s'],
+                traces_colors=['#19D3F3', '#FF6692'],
+                x_label='Tiempo',
+                y_label='Velocidad de viento (m/s)',
+                legend_labels=['WindMaster', 'Wind Sensor'])
+```
+
+### Error {.smaller}
+
+| Fase                | EM [m/s]  | EAM [m/s] |
+|---------------------|-----------|-----------|
+| Antes de calibrar   | -0.01     | 0.06      |
+| Después de calibrar | -0.00     | 0.05      |
+
+:::
+
+# Humedad relativa y CO<sub>2</sub>
+
+## SCD30
+
+::: {.panel-tabset}
+
+### Procedimiento {.smaller}
+
+Al igual que en el caso de la temperatura del aire, el SCD30 se utilizó para obtener mediciones de humedad relativa y concentraciones de CO<sub>2</sub>, empleándose nuevamente el Fluke 975 AirMeter como instrumento de referencia. La recolección de datos se realizó durante la misma campaña, por lo que las condiciones ambientales y los procedimientos fueron idénticos.
+
+### Referenciación {.smaller}
+
+```{python}
+#| echo: false
+#| label: fig-scd30
+#| fig-cap: "Comparación de las mediciones de humedad relativa y CO<sub>2</sub> del Fluke y el SCD30 durante su campaña de referenciación."
+subplot_configs = [
+    {
+        'columns': ['HR', 'HR_F'],
+        'traces_colors': ['#636EFA', '#AB63FA'],
+        'x_label': 'Tiempo',
+        'y_label': 'Humedad relativa (%)',
+        'legend_labels': ['SCD30', 'Fluke']
+    },
+    {
+        'columns': ['CO2', 'CO2_F'],
+        'traces_colors': ['#00CC96', '#19D3F3'],
+        'x_label': 'Tiempo',
+        'y_label': 'Concentración de CO<sub>2</sub> (ppm)',
+        'legend_labels': ['SCD30', 'Fluke']
+    }
+]
+    
+tt.scatter_subplots('data/scd30.parquet', subplot_configs)
+```
+
+### Error {.smaller}
+
+| Variable          | EM        | EAM       |
+|-------------------|-----------|-----------|
+| Humedad relativa  | –2.17 %   |  2.17 %   |
+| CO<sub>2</sub>    |  9.65 ppm | 13.16 ppm |
+
+:::
+
+# Sonido
+
+## Micrófono 
+
+::: {.panel-tabset}
+
+### Procedimiento {.smaller}
+
+Para calibrar el micrófono USB del DTHIS- utilizó el TES-1356 Sound Level Calibrator generando tonos de referencia de 94 dB y 114 dB a 1,000 Hz, con un error de ±0.5 dB, dicho instrumento sirvió para generar un entorno controlado de medición.
+
+Sin embargo, el ajuste final se realizó empleando la siguiente ecuación empírica:
+
+```{=tex}
+\begin{align}
+dB = 20 \log_{10}(A) + 120
+\end{align}
+``` 
+
+donde A es la amplitud RMS de la señal digitalizada.
+
+### Grabación {.smaller}
+
+Se capturó un tono constante (94 dB) durante 15 segundos a 44.1 kHz, con el micrófono acoplado al calibrador en un entorno silencioso:
+
+```python
+arecord -D plughw:3,0 -f cd -t wav -d 15 -r 44100 audio.wav
+```
+
+### Extracción {.smaller}
+
+Extracción de amplitud RMS, máxima y mínima mediante el programa `sox`:
+
+```python
+sox audio.wav -n stat 2>&1 \
+  | grep "RMS     amplitude:" \
+  | awk '{print $3}' > rms.txt
+
+# (análogo para dBmax.txt y dBmin.txt)
+```
+
+### Calibración {.smaller}
+
+```python
+import numpy as np
+
+with open('rms.txt')    as f: rms_x    = float(f.read().strip())
+with open('dBmax.txt')  as f: dBmax_x  = float(f.read().strip())
+with open('dBmin.txt')  as f: dBmin_x  = float(f.read().strip())
+
+rms_db   = round(20*np.log10(rms_x)   + 120, 4)
+dBmax_db = round(20*np.log10(dBmax_x) + 120, 4)
+dBmin_db = round(20*np.log10(abs(dBmin_x)) + 120,4)
+```
+
+Con este procedimiento, la constante 120 dB se aplicó directamente para ajustar la salida del ADC del micrófono a una escala de dB, garantizando que los valores calculados reflejen niveles de presión sonora coherentes con la referencia del calibrador.
+
+:::
+
+# Iluminancia
+
+## Fisheye
+
+::: {.panel-tabset}
+
+### Procedimiento {.smaller}
+
+En el caso de la iluminancia, no se realizó ningún proceso de calibración o referenciación. La calibración no aplica en este caso, ya que el método no depende de la respuesta espectral absoluta de la cámara, sino de un proceso computacional que transforma imágenes HDR en estimaciones de iluminancia mediante modelos de luminancia integrados en Radiance.
+
+Se empleó la cámara Arducam 5MP OV5647 Ultra Wide Angle en conjunto con el software `Radiance` y se desarrolló un script que calcula la iluminancia total mediante la integral de los valores de luminancia que conforman el mapa generado a partir de las imágenes capturadas
+
+### Cálculo de iluminancia
+Los pasos a seguir fueron: 
+
+<ol>
+  <li>Crear una **imagen HDR** fusionando fotografías con distintas exposiciones para capturar la máxima información luminosa.</li>
+  <li>Aplicar una **escala de false color** a la HDR para identificar valores de luminancia en cada punto.</li>
+  <li>Calcular la **integral del mapa** generado para determinar la iluminancia total del espacio interior en ese momento.</li>
+</ol>
+
+### Mapas de iluminancia {.smaller}
+
+En este contexto, los mapas de luminancia son cualitativos: muestran la distribución espacial de la luz, permiten ubicar zonas de mayor o menor iluminancia y evaluar su uniformidad. La cuantificación proviene del cálculo integral de la imagen HDR.
+
+![Mapa de luminancia generado con una cámara 5MP OV5647 y el software Radiance.](/images/ilum.jpg){#fig-ilum}
+
+:::
 
 # Conclusiones 
 
