@@ -38,7 +38,7 @@ El **Dispositivo de Temperatura, Humedad, Iluminación y Sonido de Campaña** (D
 </ul>
 
 
-El DTHIS-C está conformado por seis sensores, dos microcontroladores y dos acondicionadores de señal. Para comprender su funcionamiento, es necesario introducir algunos conceptos básicos de instrumentación electrónica, tales como sensores, microcontroladores y acondicionadores de señal, los cuales constituyen la base tecnológica de su diseño.
+El DTHIS-C está conformado por seis sensores, dos microcontroladores y dos acondicionadores de señal.
 
 ## Planteamiento del problema 
 
